@@ -58,12 +58,10 @@ export const AddPost = () => {
         tags,
       }
 
-      const {data} = isEditing 
-      ? await axios.patch(`/posts/${id}`,fields)
-      : await axios.post("/posts",fields);
+      const {data} = await axios.post("/posts",fields);
 
-      const _id = isEditing ? id : data._id
-      navigate(`/posts/${_id}`)
+      const id = data.id
+      navigate(`/posts/${id}`)
     } catch (error) {
       console.warn(error)
       alert("Ошибка при создание статьи")
